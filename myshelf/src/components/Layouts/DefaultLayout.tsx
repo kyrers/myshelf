@@ -1,6 +1,5 @@
 "use client";
 
-import type { Metadata } from "next";
 import {
   EthereumClient,
   w3mConnectors,
@@ -26,11 +25,6 @@ const wagmiConfig = createConfig({
 });
 
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
-
-export const metadata: Metadata = {
-  title: "Myshelf",
-  description: "An app",
-};
 
 export default function DefaultLayout({
   children,
