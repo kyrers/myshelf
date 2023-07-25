@@ -1,5 +1,6 @@
 "use client";
 
+import { Global } from "@emotion/react";
 import {
   EthereumClient,
   w3mConnectors,
@@ -8,9 +9,12 @@ import {
 import { Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { mainnet, optimism, polygon } from "wagmi/chains";
+import { globalStyle } from "./style";
 
 if (!process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID) {
-  throw new Error("You need to provide NEXT_PUBLIC_PROJECT_ID env variable");
+  throw new Error(
+    "You need to provide a NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID env variable"
+  );
 }
 
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
@@ -33,6 +37,7 @@ export default function DefaultLayout({
 }) {
   return (
     <>
+      <Global styles={globalStyle} />
       <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
       <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </>
