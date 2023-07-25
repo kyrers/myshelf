@@ -9,7 +9,8 @@ import {
 import { Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { mainnet, optimism, polygon } from "wagmi/chains";
-import { globalStyle } from "./style";
+import { ContentWrapper, globalStyle } from "./style";
+import { Menu } from "@/components/Menu";
 
 if (!process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID) {
   throw new Error(
@@ -18,7 +19,6 @@ if (!process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID) {
 }
 
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
-
 const chains = [mainnet, polygon, optimism];
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
@@ -27,7 +27,6 @@ const wagmiConfig = createConfig({
   connectors: w3mConnectors({ chains, projectId }),
   publicClient,
 });
-
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
 
 export default function DefaultLayout({
@@ -38,7 +37,14 @@ export default function DefaultLayout({
   return (
     <>
       <Global styles={globalStyle} />
-      <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
+
+      <WagmiConfig config={wagmiConfig}>
+        <ContentWrapper>
+          <Menu />
+          <main>{children}</main>
+        </ContentWrapper>
+      </WagmiConfig>
+
       <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </>
   );
