@@ -10,7 +10,7 @@ import { Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { mainnet, optimism, polygon, arbitrum } from "wagmi/chains";
 import { ContentWrapper, globalStyle } from "./style";
-import { Menu } from "@/components/Menu";
+import { Header } from "@/components/Header";
 
 if (!process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID) {
   throw new Error(
@@ -40,7 +40,7 @@ export default function DefaultLayout({
 
       <WagmiConfig config={wagmiConfig}>
         <ContentWrapper>
-          <Menu />
+          <Header />
           <main>{children}</main>
         </ContentWrapper>
       </WagmiConfig>
