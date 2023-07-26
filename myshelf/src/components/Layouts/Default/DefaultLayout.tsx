@@ -8,7 +8,7 @@ import {
 } from "@web3modal/ethereum";
 import { Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { mainnet, optimism, polygon } from "wagmi/chains";
+import { mainnet, optimism, polygon, arbitrum } from "wagmi/chains";
 import { ContentWrapper, globalStyle } from "./style";
 import { Menu } from "@/components/Menu";
 
@@ -19,7 +19,7 @@ if (!process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID) {
 }
 
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
-const chains = [mainnet, polygon, optimism];
+const chains = [mainnet, polygon, optimism, arbitrum];
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
 const wagmiConfig = createConfig({
